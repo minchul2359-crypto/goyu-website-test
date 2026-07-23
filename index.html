@@ -2346,7 +2346,6 @@
         button.setAttribute("aria-pressed", String(active));
       });
 
-      localStorage.setItem("goyuLanguage", language);
       renderRoutine(currentRoutineMode);
     }
 
@@ -2520,8 +2519,7 @@
     });
 
     rememberPageCopy();
-    const savedLanguage = localStorage.getItem("goyuLanguage");
-    translatePage(savedLanguage === "en" ? "en" : "ko");
+    translatePage("ko");
   </script>
 </body>
 </html>
