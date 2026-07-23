@@ -2164,7 +2164,7 @@
         "베타 알림 신청": "Join the Beta",
         "메뉴 열기": "Open menu",
         "언어 선택": "Language selection",
-        "한국어": "한국어",
+        "한국어": "KO",
         "어떤 제품을 살까보다,": "Beyond what to buy,",
         "오늘은 어떻게 관리할까.": "how should I care for my skin today?",
         "피부 상태와 보유 제품을 바탕으로": "Based on your skin condition and the products you own,",
@@ -2293,7 +2293,7 @@
       while (walker.nextNode()) {
         const node = walker.currentNode;
         if (node.parentElement.closest("script, style")) continue;
-        const value = node.nodeValue.trim();
+        const value = node.nodeValue.trim().replace(/\s+/g, " ");
         if (value) originalText.set(node, value);
       }
 
@@ -2312,7 +2312,18 @@
       originalText.forEach((korean, node) => {
         const leading = node.nodeValue.match(/^\s*/)[0];
         const trailing = node.nodeValue.match(/\s*$/)[0];
-        node.nodeValue = leading + (dictionary[korean] || korean) + trailing;
+        let translated = dictionary[korean];
+
+        if (!translated && language === "en") {
+          translated = Object.entries(dictionary)
+            .sort(([a], [b]) => b.length - a.length)
+            .reduce(
+              (copy, [source, target]) => copy.replaceAll(source, target),
+              korean
+            );
+        }
+
+        node.nodeValue = leading + (translated || korean) + trailing;
       });
 
       translatedAttributes.forEach((values, element) => {
