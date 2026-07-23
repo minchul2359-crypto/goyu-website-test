@@ -1,0 +1,14 @@
+{
+  "name": "goyu-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "prebuild": "mkdir -p public && cp index.html public/index.html",
+    "build": "next build"
+  },
+  "dependencies": {
+    "next": "^15.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
