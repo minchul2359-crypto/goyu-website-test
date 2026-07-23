@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "mkdir -p public && cp index.html public/index.html",
     "build": "vinext build",
-    "postbuild": "mkdir -p dist/.openai && cp .openai/hosting.json dist/.openai/hosting.json"
+    "postbuild": "node scripts/prepare-hosting.mjs"
   },
   "dependencies": {
     "react": "^19.0.0",
